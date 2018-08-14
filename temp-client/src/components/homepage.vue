@@ -2,16 +2,17 @@
     <div class="homepage">
         <Navbar></Navbar>
         <br><br><br><br><br><br>
-        <div class="container">
+        <div class="container" >
             <div class="d-flex align-items-center justify-content-center">
-                <div>
+                <div class="content" >
                     <h1>ORGANIC NUT MILKS.<br>WE MAKE 'EM FRESH.<br>YOU DRINK 'EM FRESH.</h1>
                     <p>Happily delivering to doorsteps in Austin, San Antonio, Houston and Dallas. Made in Austin, TX</p>
                 </div>
             </div>
         </div>
         <br><br><br><br><br><br>
-        <div class="d-flex flex-row justify-content-between align-items-end">
+        <div class="container-fluid">
+            <div id="tempat-susu" class="d-flex flex-row align-items-end justify-content-around">
             <div class="p-1">
                  <article class="card ">
                     <div class="card-body">
@@ -19,7 +20,7 @@
                             <a href="#"   class="product-name" style="padding-bottom:0px; margin-bottom:0px">
                                 <img src="http://cdn8.bigcommerce.com/s-ayhps3hr1w/stencil/b45bc200-7d2d-0136-0c25-633ff0d6ced1/e/67f30db0-7d4b-0136-d284-4d81a5daa3e5/img/original-icon.svg" class="product-icon" width="25px"><br><br>
                                 <span class="original">THIS ONE'S Original</span>
-                                <figure class="card-figure" style="height: 220px; width: auto;overflow: hidden">
+                                <figure class="card-figure">
                                     <img class="card-image" src="http://cdn8.bigcommerce.com/s-ayhps3hr1w/images/stencil/500x659/products/118/416/Fronks_Original_01__45224.1484091301.png?c=2" alt="Original" title="Original">
                                 </figure>
                             </a>
@@ -27,7 +28,40 @@
                     </div>
                 </article>
             </div>
+            <div class="p-1">
+                 <article class="card ">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#"   class="product-name" style="padding-bottom:0px; margin-bottom:0px">
+                                <img src="http://cdn8.bigcommerce.com/s-ayhps3hr1w/stencil/b45bc200-7d2d-0136-0c25-633ff0d6ced1/e/67f30db0-7d4b-0136-d284-4d81a5daa3e5/img/cocoa-icon.svg" class="product-icon" width="25px"><br><br>
+                                <span class="cocoa">THIS ONE'S Cocoa</span>
+                                <figure class="card-figure">
+                                    <img class="card-image" src="http://cdn8.bigcommerce.com/s-ayhps3hr1w/images/stencil/500x659/products/117/415/Fronks_Cocoa_01__28865.1484091275.png?c=2" alt="Cocoa" title="Cocoa">
+                                </figure>
+                            </a>
+                        </h4>
+                    </div>
+                </article>
+            </div>
+            <div class="p-1">
+                 <article class="card ">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#"   class="product-name" style="padding-bottom:0px; margin-bottom:0px">
+                                <img src="http://cdn8.bigcommerce.com/s-ayhps3hr1w/stencil/b45bc200-7d2d-0136-0c25-633ff0d6ced1/e/67f30db0-7d4b-0136-d284-4d81a5daa3e5/img/simple-icon.svg" class="product-icon" width="25px"><br><br>
+                                <span class="simple">THIS ONE'S Simple</span>
+                                <figure class="card-figure">
+                                    <img class="card-image" src="http://cdn8.bigcommerce.com/s-ayhps3hr1w/images/stencil/500x659/products/114/419/Fronks_Simple_04__73447.1484151189.png?c=2" alt="Simple" title="Simple">
+                                </figure>
+                            </a>
+                        </h4>
+                    </div>
+                </article>
+            </div>
+            </div>
         </div>
+        
+        
 
     </div>
 </template>
@@ -75,8 +109,22 @@ span{
     text-transform: uppercase
 }
 
+
+#tempat-susu{
+    
+    width: 150vh
+}
+
 .original{
     color: #387da3
+}
+
+.cocoa{
+    color: #df4597
+}
+
+.simple{
+    color: #555
 }
 .card-image{
     padding-bottom:  0px;
@@ -99,17 +147,26 @@ span{
 .card-title {
     font-size: 15px;
     margin: 0 0 0;
-    height:100%
+    height:100%;
+    /*padding-left: 25px*/
 }
 
 .card-figure {
     padding: 0;
-    position: relative;
     margin: 0 0 0 !important;
     -webkit-margin-before: 1em;
     -webkit-margin-after: 1em;
     -webkit-margin-start: 40px;
     -webkit-margin-end: 40px;
+}
+
+figure{
+    height: 230px;
+    width: auto;
+    overflow: hidden;
+}
+figure:hover{
+    height: 240px;
 }
 
 *, :after, :before {

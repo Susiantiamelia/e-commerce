@@ -1,13 +1,13 @@
 <template>
-            <nav class="navbar navbar-toggleable-sm navbar-light bg-faded">
+            <nav class="navbar navbar-toggleable-sm navbar-light bg-faded" style="position: fixed; width: 100%">
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand" href="#">FRONKS</a>
-                <div id="navbarNavDropdown" class="navbar-collapse collapse" style="justify-content: flex-end;">
+                <router-link class="navbar-brand" to="/">FRONKS</router-link>
+                <div id="navbarNavDropdown" class="navbar-collapse collapse" style="justify-content: flex-end; background-color: #efefef">
                     <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><b>NUT MILKS</b></a>
+                        <router-link class="nav-link" to="/Milks"><b>MILKS</b></router-link>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"><b>ABOUT US</b></a>
@@ -57,5 +57,7 @@ export default {
     font-family: 'Karla', sans-serif !important;
     font-size: 14px !important;
 }
+
+
 </style>
 

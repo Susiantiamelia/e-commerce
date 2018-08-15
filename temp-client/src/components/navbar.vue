@@ -19,7 +19,7 @@
                         <a class="nav-link" href="#"><b>YOUR ORDER</b></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><b>LOGIN</b></a>
+                        <router-link class="nav-link" to="/Login"><b>LOGIN</b></router-link>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"><b>SIGN UP</b></a>
@@ -39,6 +39,10 @@ export default {
 @font-face {
     font-family: Lydian;
     src: url(../assets/fonts/Lydian_BT_Roman.ttf);
+}
+
+.navbar{
+    position: relative !important;
 }
 
 .navbar-brand{

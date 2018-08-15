@@ -1,9 +1,6 @@
 <template>
     <div class="milky">
-        <div>
-            <Navbar></Navbar>
-        </div>
-        <div class="container-fluid" style="padding-top: 40vh">
+        <div class="container-fluid" style="padding-top: 10vh">
             <div class="row">
                 <div class="col-2 col-sm-2 sol-lg-2 col-md-2 col-xl-2" style="margin-top: auto;margin-bottom: auto;background-color: transparent; width: 100%">
                     <ul>
@@ -27,17 +24,42 @@
                         </li>
                     </ul>
                 </div>
+                <div class="col-9 col-sm-9 sol-lg-9 col-md-9 col-xl-9" style="border: 1px solid black; ">
+                    <div class="container-fluid">
+                        <div class="row">
+                            
+                            <div class="col-3 col-sm-3 sol-lg-3 col-md-3 col-xl-3" style="border: 1px solid black">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title">Almond Milk</div>
+                                        <div class="card-img">
+                                            <img class="card-image" src="http://cdn8.bigcommerce.com/s-ayhps3hr1w/images/stencil/500x659/products/114/419/Fronks_Simple_04__73447.1484151189.png?c=2" alt="Simple" title="Simple" height="130vh">
+                                        </div>
+                                        <br>
+                                        <button type="button" class="btn btn-outline-secondary btn-sm" @click="openModal">View Detail</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-           
+        
     </div>
 </template>
 
 <script>
-import Navbar from '@/components/navbar.vue'
+import Modal from '@/components/details.vue'
+import {mapActions} from 'vuex'
 export default {
     components: {
-        Navbar
+        Modal
+    },
+    methods: {
+        ...mapActions([
+            'openModal'
+        ])
     }
 }
 </script>
@@ -54,6 +76,10 @@ export default {
 
 ul{
     padding-left: 0
+}
+
+a{
+    text-decoration: none
 }
 
 .original{

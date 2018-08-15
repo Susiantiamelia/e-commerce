@@ -19,7 +19,7 @@
                         <h4 class="card-title">
                             <a href="#"   class="product-name" style="padding-bottom:0px; margin-bottom:0px">
                                 <img src="http://cdn8.bigcommerce.com/s-ayhps3hr1w/stencil/b45bc200-7d2d-0136-0c25-633ff0d6ced1/e/67f30db0-7d4b-0136-d284-4d81a5daa3e5/img/original-icon.svg" class="product-icon" width="25px"><br><br>
-                                <span class="original">THIS ONE'S Original</span>
+                                <span class="original">THIS ONE'S Cow Milk</span>
                                 <figure class="card-figure">
                                     <img class="card-image" src="http://cdn8.bigcommerce.com/s-ayhps3hr1w/images/stencil/500x659/products/118/416/Fronks_Original_01__45224.1484091301.png?c=2" alt="Original" title="Original">
                                 </figure>
@@ -34,7 +34,7 @@
                         <h4 class="card-title">
                             <a href="#"   class="product-name" style="padding-bottom:0px; margin-bottom:0px">
                                 <img src="http://cdn8.bigcommerce.com/s-ayhps3hr1w/stencil/b45bc200-7d2d-0136-0c25-633ff0d6ced1/e/67f30db0-7d4b-0136-d284-4d81a5daa3e5/img/cocoa-icon.svg" class="product-icon" width="25px"><br><br>
-                                <span class="cocoa">THIS ONE'S Cocoa</span>
+                                <span class="cocoa">THIS ONE'S Veggie Milk</span>
                                 <figure class="card-figure">
                                     <img class="card-image" src="http://cdn8.bigcommerce.com/s-ayhps3hr1w/images/stencil/500x659/products/117/415/Fronks_Cocoa_01__28865.1484091275.png?c=2" alt="Cocoa" title="Cocoa">
                                 </figure>
@@ -49,7 +49,7 @@
                         <h4 class="card-title">
                             <a href="#"   class="product-name" style="padding-bottom:0px; margin-bottom:0px">
                                 <img src="http://cdn8.bigcommerce.com/s-ayhps3hr1w/stencil/b45bc200-7d2d-0136-0c25-633ff0d6ced1/e/67f30db0-7d4b-0136-d284-4d81a5daa3e5/img/simple-icon.svg" class="product-icon" width="25px"><br><br>
-                                <span class="simple">THIS ONE'S Simple</span>
+                                <span class="simple">THIS ONE'S Goat Milk</span>
                                 <figure class="card-figure">
                                     <img class="card-image" src="http://cdn8.bigcommerce.com/s-ayhps3hr1w/images/stencil/500x659/products/114/419/Fronks_Simple_04__73447.1484151189.png?c=2" alt="Simple" title="Simple">
                                 </figure>
@@ -109,6 +109,9 @@ span{
     text-transform: uppercase
 }
 
+a{
+    text-decoration: none
+}
 
 #tempat-susu{
     

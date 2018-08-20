@@ -42,11 +42,12 @@
     el: '#app',
     methods: {
       login(value){
+        event.preventDefault()
         console.log(value)
         axios.post('http://localhost:3000/users/login', value)
         .then(result => {
-          localStorage.setItem(result.data.token)
-          
+          localStorage.setItem('token',result.data.token)
+          window.location.href="dashboard.html"
         })
         .catch(err => {
           alert(err.message)

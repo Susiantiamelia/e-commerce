@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/navbar.css">
+  <link rel="stylesheet" href="./css/post-item.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link rel="stylesheet" href="sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div id="app">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="index.html">FRONKS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="d-flex flex-row justify-content-end">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="dashboard.html"><b>MILKS</b></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="cart.html"><b>YOUR ORDER</b></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="add-item.html" v-if="token == 'admin'"><b>ADD ITEM</b></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="login-regist.html" v-if="!token"><b>LOGIN</b></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="login-regist.html" v-if="!token"><b>SIGN UP</b></a>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" v-if="token" @click="logout"><b>LOGOUT</b></button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="d-flex justify-content-center">
+          <div class="card">
+            <div class="input-group mb-5">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile02" accept=".jpg, .jpeg, .png .webp" v-on:change="getImage($event)">
+                <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">{{ image.name }}</label>
+              </div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="name" placeholder="name" v-model="name">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" id="price" placeholder="price" v-model="price">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" id="description" placeholder="description" v-model="desc">
+            </div>
+            <div class="form-group">
+              <label for="sel1">Category:</label>
+              <select class="form-control" id="sel1">
+                <option>cow</option>
+                <option>veggie</option>
+                <option>goat</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-outline-dark" @click="addItem">Submit</button>
+          </div>
+        </div>
+      </div>
+  </div>
+  
+    <style>
+      #app{
+        background-image: linear-gradient(#efefef 90%,#fff 15%);
+        height: 100vh
+      }
+      
+    </style>
+
+    <script>
+    let app = new Vue({
+      el: '#app',
+      data(){
+        return {
+          token: localStorage.getItem('token'),
+          image: {
+            name: 'Choose File'
+          } ,
+          name: '',
+          price: '',
+          desc: ''
+        }
+      },
+      methods: {
+        getImage(e){
+          this.image = e.target.files[0]
+          console.log(this.image);
+          
+        },
+        logout(){
+          localStorage.removeItem('token')
+        },
+        addItem(){
+          let category = document.getElementById("sel1").value
+
+          let value = {
+            name: this.name,
+            price: this.price,
+            desc: this.desc,
+            category: category,
+            image: this.image
+          }
+
+          let formData = new FormData()
+          formData.append('image', value.image)
+          formData.append('name', value.name)
+          formData.append('price', value.price)
+          formData.append('desc', value.desc)
+          formData.append('category', value.category)
+          
+          axios.post('http://localhost:3000/item/post-item', formData,{
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+          .then(result => {
+            this.image= 'Choose File'
+            this.name= ''
+            this.price= ''
+            this.desc= ''
+            this.category= ''
+
+            swal({
+              title: "Success added item",
+              type: "success",
+            });
+          })
+          .catch(err => {
+              swal({
+                  title: `${err.message}`,
+                  type: "error",
+              });
+          })
+        }
+      }
+    })
+    </script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+</html>

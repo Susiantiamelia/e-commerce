@@ -58,8 +58,17 @@
             }
           })
           .then(result => {
-            console.log(result);
+            swal({
+              title: "Success added item",
+              type: "success",
+            });
             
+          })
+          .catch(err => {
+              swal({
+                  title: `${err.message}`,
+                  type: "error",
+              });
           })
         }
       }

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/navbar.css">
+  <link rel="stylesheet" href="./css/category.css">
+  <link rel="stylesheet" href="./css/milk.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link rel="stylesheet" href="sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.11/sweetalert2.all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.11/sweetalert2.min.js"></script>
+
+</head>
+<body>
+  <div id="app">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="index.html">FRONKS</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="d-flex flex-row justify-content-end">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="dashboard.html"><b>MILKS</b></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cart.html"><b>YOUR ORDER</b></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="add-item.html" v-if="token == 'admin'"><b>ADD ITEM</b></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login-regist.html" v-if="!token"><b>LOGIN</b></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login-regist.html" v-if="!token"><b>SIGN UP</b></a>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link" v-if="token" @click="logout"><b>LOGOUT</b></button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+          <div class="col-3 col-sm-3 sol-lg-3 col-md-3 col-xl-3" style="margin-top: auto;margin-bottom: auto;background-color: transparent; width: 100%">
+              <ul>
+                <li v-for="(logo,index) in logos">
+                  <button @click="cat(logo.id)">
+                    <img :src="logo.img" width="12px">
+                    <span :class="logo.class" style="text-align: left;width: 100%; margin-left: 5px"><i class="fas fa-caret-left" style="margin-right: 10px; margin-left: 8px"></i><b>{{ logo. span }}</b></span>
+                  </button>
+                </li>
+              </ul>
+          </div>
+          <div class="col-9 col-sm-9 sol-lg-9 col-md-9 col-xl-9">
+              <div class="container-fluid">
+                  <div class="row">
+                    <div v-for="(milk,key) in milks" class="col-3 col-sm-3 sol-lg-3 col-md-3 col-xl-3" >
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="card-title">{{ milk.name }}</div>
+                            <div class="card-img">
+                              <img class="card-image" style="padding-left: 30px" :src="milk.image" alt="Simple" title="Simple" height="130vh">
+                            </div>
+                            <br>
+                            <p id="milkprice">{{ milk.price }}</p>
+                            <br>
+                            <button v-if="token == 'admin'" type="button" class="btn btn-outline-dark btn-sm" @click="edit(milk._id)">Edit</button>
+                            <button v-if="token == 'admin'" id="delete" type="button" @click="deletemilk(milk._id)"><i class="fas fa-trash"></i></button>
+                            <button type="button" class="btn btn-outline-dark btn-sm" @click="detail(milk._id)">View Detail</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+          </div>
+    </div>
+  </div>
+
+  <style>
+    #app{
+      background-image: linear-gradient(#efefef 90%,#fff 15%);
+      height: 100vh
+    }
+    
+    .swal2-popup .swal2-styled.swal2-confirm {
+      background-color: #3085d6 !important;
+    }
+
+    .swal2-popup .swal2-styled.swal2-cancel {
+      background-color: rgb(221, 51, 51) !important
+    }
+    
+  </style>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data(){
+        return{
+          logos: [
+            {
+              id: 'cow',
+              img: "http://cdn8.bigcommerce.com/s-ayhps3hr1w/stencil/b45bc200-7d2d-0136-0c25-633ff0d6ced1/e/67f30db0-7d4b-0136-d284-4d81a5daa3e5/img/original-icon.svg",
+              class: 'original',
+              span: 'COW MILK'
+            },
+            {
+              id: 'veggie',
+              img: "http://cdn8.bigcommerce.com/s-ayhps3hr1w/stencil/b45bc200-7d2d-0136-0c25-633ff0d6ced1/e/67f30db0-7d4b-0136-d284-4d81a5daa3e5/img/cocoa-icon.svg",
+              class: 'cocoa',
+              span: 'VEGGIE MILK'
+            },
+            {
+              id: 'goat',
+              img: "http://cdn8.bigcommerce.com/s-ayhps3hr1w/stencil/b45bc200-7d2d-0136-0c25-633ff0d6ced1/e/67f30db0-7d4b-0136-d284-4d81a5daa3e5/img/simple-icon.svg",
+              class: 'simple',
+              span: 'GOAT MILK'
+            }
+          ],
+          milks: '',
+          token: localStorage.getItem('token')
+        }
+      },
+      methods: {
+        logout(){
+          localStorage.removeItem('token')
+        },
+        add(){
+          swal({
+            title: 'Add item',
+            html: 
+            `<input id="image" v-on:change="getFile($event)" class="swal2-input" type="file">` +
+            `<input id="name" class="swal2-input" type="text" placeholder="Item Name">` +
+            `<input id="desc" class="swal2-input" type="text" placeholder="Item description">` +
+            `<input id="price" class="swal2-input" type="text" placeholder="Item Price">`+
+            `<input id="category" list="categories" name="category" placeholder="Item Category" class="swal2-input">
+              <datalist id="categories" >
+                <option value="cow">
+                <option value="veggie">
+                <option value="goat">
+              </datalist>`,
+              focusConfirm: false,
+              preConfirm: () => {
+               
+              }
+          })
+        },
+        getFile(e){
+          console.log(e)
+        },
+        cat(value){
+          console.log(value);
+          axios.get(`http://localhost:3000/item/category/${value}`)
+          .then(result => {
+            console.log(result);
+
+            this.milks = result.data
+            
+          })
+          .catch(err => {
+            console.log(err);
+            
+          })
+          
+        },
+        detail(value){
+          console.log(value);
+          window.location.href=`/detail-milk.html?${value}`
+        },
+        edit(value){
+          console.log(value);
+          axios.get(`http://localhost:3000/item/milk/${value}`)
+          .then(result => {
+            let item= result.data.item[0]
+            console.log(item);
+            
+            swal({
+              title: 'Edit Item',
+              html: 
+              `<input id="name" class="swal2-input" type="text" value="${item.name}">` +
+              `<input id="price" class="swal2-input" type="text" value="${item.price}">` +
+              `<input id="desc" class="swal2-input" type="text" value="${item.desc}">`+
+              `<input id="category" class="swal2-input" type="text" value="${item.category}">`,
+              focusConfirm: false,
+              preConfirm: () => {
+                let input = {
+                  name: document.getElementById('name').value,
+                  price: document.getElementById('price').value,
+                  desc: document.getElementById('desc').value,
+                  category: document.getElementById('category').value
+                }
+                
+
+                axios.put(`http://localhost:3000/item/update/${value}`, input)
+                .then(result => {
+                  this.allmilk()
+                })
+                .catch(err => {
+                  alert(err)
+                })
+              }
+            })
+          })
+          .catch(err => {
+              alert(err)
+          })
+          
+        },
+        deletemilk(value){
+          console.log(value);
+
+          swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Delete!'
+          })
+          .then(result => {
+            if(result.value){
+              axios.delete(`http://localhost:3000/item/delete/${value}`)
+              .then(result => {
+                this.allmilk()
+              })
+              .catch(err => {
+                alert(err)
+              })
+              
+            }
+          })
+          
+        },
+        allmilk(){
+          axios.get('http://localhost:3000/item/all')
+          .then(result => {
+            this.milks = result.data
+          })
+          .catch(err => {
+            alert(err)
+          })
+        }
+      },
+      created() {
+        this.allmilk()
+      },
+    })
+  </script>
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+</html>

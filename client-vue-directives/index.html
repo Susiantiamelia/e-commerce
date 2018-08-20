@@ -1,190 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <link href="main.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/navbar.css">
+  <link rel="stylesheet" href="./css/Moto.css">
+  <link rel="stylesheet" href="./css/milk-home.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
-<body >
-    <div id="ecommerce">
-        <nav id="navbar" class="navbar navbar-expand-lg navbar-light" >
-            <a id="logo" class="navbar-brand" href="#">
-            <img src="https://ocloofficial.com/wp-content/uploads/2017/12/cropped-logo-web-1.png"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                
-                <ul id="list-navbar" class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">BERANDA<span class="sr-only">(current)</span></a>
+<body>
+  <div id="app">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="index.html">FRONKS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-flex flex-row justify-content-end">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a class="nav-link" href="dashboard.html"><b>MILKS</b></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">BELANJA</a>
+                      <a class="nav-link" href="cart.html"><b>YOUR ORDER</b></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">AKUN SAYA</a>
+                      <a class="nav-link" href="add-item.html" v-if="token == 'admin'"><b>ADD ITEM</b></a>
                     </li>
                     <li class="nav-item">
-                            <a class="nav-link" href="#">KONFIRMASI</a>
+                      <a class="nav-link" href="login-regist.html" v-if="!token"><b>LOGIN</b></a>
                     </li>
                     <li class="nav-item">
-                            <a class="nav-link" href="#">PANDUAN</a>
+                      <a class="nav-link" href="login-regist.html" v-if="!token"><b>SIGN UP</b></a>
                     </li>
                     <li class="nav-item">
-                            <a class="nav-link" href="#">KONTAK</a>
+                      <button class="nav-link" v-if="token" @click="logout"><b>LOGOUT</b></button>
                     </li>
-                </ul>
-                
-                <ul id="search-cart" class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item active" style="width: 75px;">
-                        <a class="nav-link " href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false" v-on:click="search">
-                        <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/105498-200.png" width="35%">
-                        </a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#" v-on:click="Cart">Cart</a>
-                    </li>
-                </ul>
+              </ul>
             </div>
-        </nav>
-    
-        <div id="navbar2" class="container-fluid">
-                <nav aria-label="breadcrumb">
-                        <ol id="breadcrumb-position" class="breadcrumb">
-                        <li class="breadcrumb-item"><a id="position" href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a id="position" href="#">Bawahan</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Kulot</li>
-                        </ol>
-                    </nav>
-            <h5 style="margin-left: 50px"><b>Kulot</b></h5>
-            <br><br>
         </div>
-        <div id="categories" class="row">
-            <div class="col-lg-3">
-                <div class=" widget woocommerce widget_product_categories" style="margin-top: 60px;">
-                    <h2 class="widget-title" style="font-size: 1rem;margin-bottom: 1em;font-weight: 500;">
-                        <span>Product categories</span>
-                    </h2>
-                    <select name="product_cat" id="product_cat" class="dropdown_product_cat">
-                        <option value="">Select a category</option>
-                        <div v-for="category in categories">
-                                <option v-for="category in categories" v-if="category === 'Kulot'" class="level-0" value="category" selected>{{ category }}</option>
-                                <option v-for="category in categories" v-if="category !== 'Kulot'" class="level-0" value="category">{{ category }}</option>
-                        </div>
-                    </select>
-                </div>        
+    </nav>
+    <div class="container" >
+        <div class="d-flex align-items-center justify-content-center">
+            <div class="content" >
+                <h1>ORGANIC NUT MILKS.<br>WE MAKE 'EM FRESH.<br>YOU DRINK 'EM FRESH.</h1>
+                <p>Happily delivering to doorsteps in Austin, San Antonio, Houston and Dallas. Made in Austin, TX</p>
             </div>
-            <div class="col-lg-9" style="margin-bottom: 50px; margin-top: 50px;">
-                <div class="before-shop-loop" style="display: inline;">
-                    <form class="woocommerce-ordering">
-                        <select name="orderby" class="orderby">
-                            <option value="popularity">Sort by popularity</option>
-                            <option value="rating">Sort by average rating</option>
-                            <option value="date" selected="selected">Sort by newness</option>
-                            <option value="price">Sort by price: low to high</option>
-                            <option value="price-desc">Sort by price: high to low</option>
-                        </select>
-                        <input type="hidden" name="paged" value="1">
-                    </form>
-                </div>
-            <div class="row" >
-                <div class="col-lg-3" v-for="item in items">
-                    <div class="container">
-                        <div class="card" style="width: 13rem; margin-top: 10px; border: 1px solid white;">
-                                <div class="card-body">
-                                    <a href="#" style="margin-left: -25px;"><img v-bind:src="item.image" width="130%"></a>
-                                    <span class="card-title"><a href="#" style="color: black">{{ item.name }}</a></span>
-                                    <p class="card-subtitle mb-2 text-muted">{{ item.price }}</p>
-                                    <a href="#" class="card-link" v-on:click="addToCart(item)"><img src="http://www.endlessicons.com/wp-content/uploads/2012/11/shopping-cart-icon-614x460.png" width="25%"></a>
-                                    <a href="#" class="card-link" v-on:click="addToWishlist"><img src="data:image/png;base64,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"width="10%"></a>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                           
-                
-                
-            </div>
-            </div>
-            <div class="container-fluid" style="border-top: 1px solid #e8e8e8">
-                <div class="container" style="margin-top: 30px; margin-bottom: 30px">
-                    <div class="d-flex flex-row justify-content-between">  
-                        <div class="p-2">
-                            <p>Copyright © 2017 OcloOfficial</p>
-                        </div> 
-                        <div class="p-2">
-                            <a href="https://www.instagram.com/oclo.official/"><img src="https://cdn2.iconfinder.com/data/icons/instagram-ui/48/jee01-10-128.png" width="30%"></a>
-                        </div>             
-                    </div>        
-                </div>    
-            </div>
+        </div>
     </div>
+    <div class="container">
+        <div class="d-flex flex-row justify-content-around">
+            <div class="p-1" v-for="(milk,key) in milks">
+                <article class="card ">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#" class="product-name" style="padding-bottom:0px; margin-bottom:0px">
+                                <img :src="milk.logo" class="product-icon" width="25px"><br><br>
+                                <span :class="milk.class">{{ milk.name }}</span>
+                                <figure class="card-figure">
+                                    <img class="card-image" :src="milk.img" :alt="milk.alt" title="milk.title">
+                                </figure>
+                            </a>
+                        </h4>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <style>
+    #app{
+      background-image: linear-gradient(#efefef 90%,#fff 15%);
+      overflow: hidden;
+      position: relative;
+      height: 100vh
+    }
     
-    <script>
-    var ecommerce = new Vue({
-        el: '#ecommerce',
-        data: {
-            items: [
-                {image: "https://ocloofficial.com/wp-content/uploads/2018/07/1531639373670.jpg", name: "Jelya Cullotes Jeans", price: "Rp95.000" },
-                {image: "https://ocloofficial.com/wp-content/uploads/2018/07/658F931C-4D9A-4B20-92FB-320BD9C70184-610x606.png", name: "Myza Culotes",price: "Rp 80.000"},
-                {image: "https://ocloofficial.com/wp-content/uploads/2018/06/CB6A4C7E-042B-4336-BCEF-60DCAA47E4EC-1024x1024-01-610x610.jpeg", name: "Vazza Cullotes", price: "Rp 80.000"},
-                {image: "https://ocloofficial.com/wp-content/uploads/2018/07/1531560922245-610x610.jpg", name: "Mevy Cullotes", price: "Rp58.000"},
-                {image: "https://ocloofficial.com/wp-content/uploads/2018/07/1531477160492-610x610.jpg", name: "Vivy line cullotes", price: "Rp60.000"},
-                {image: "https://ocloofficial.com/wp-content/uploads/2018/07/1531475489913-610x610.jpg", name: "Astry Pants", price: "Rp78.000"},
-                {image: "https://ocloofficial.com/wp-content/uploads/2018/07/1531476049441-610x610.jpg", name: "Carrya Pants", price: "Rp78.000"},
-                {image: "https://ocloofficial.com/wp-content/uploads/2018/07/1530880282267-610x610.jpg", name: "Carrya Cullotes", price: "Rp78.000"}
-            ],
-            categories: ["Atasan", "Bawahan", "Blouse", "Hijab","Jaket", "Jeans","Kemeja", "Kulot", "Outer", "Sweater", "Uncategorized"],
-            cart_item: []
+  </style>
+
+
+  <script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      token: localStorage.getItem('token'),
+      milks: [
+        {
+          logo: "http://cdn8.bigcommerce.com/s-ayhps3hr1w/stencil/b45bc200-7d2d-0136-0c25-633ff0d6ced1/e/67f30db0-7d4b-0136-d284-4d81a5daa3e5/img/original-icon.svg",
+          name: "THIS ONE'S Cow Milk",
+          img: "http://cdn8.bigcommerce.com/s-ayhps3hr1w/images/stencil/500x659/products/118/416/Fronks_Original_01__45224.1484091301.png?c=2",
+          alt: "Original",
+          title: "Original" ,
+          class: "original"
         },
-        methods: {
-            search: function(){
-                swal({
-                    text: 'Find your style!".',
-                    content: "input",
-                    button: {
-                        text: "Search!",
-                        closeModal: false,
-                    },
-                    })
-            },
-            addToCart: function(item){
-                this.cart_item.push(item)
-                swal({
-                    title: "Good job!",
-                    text: "Item added to cart!",
-                    icon: "success",
-                    button: "Ok!",
-                });
-            },
-            addToWishlist: function(){
-                swal({
-                    title: "Good job!",
-                    text: "Itam added to your wishlist!",
-                    icon: "success",
-                    button: "Ok!",
-                    });
-            },
-            Cart: function(){
-                swal({
-                    title: "Thank You!",
-                    text: "Come again and get your style!",
-                    button: "Ok!",
-                    });
-            }
+        {
+          logo: "http://cdn8.bigcommerce.com/s-ayhps3hr1w/stencil/b45bc200-7d2d-0136-0c25-633ff0d6ced1/e/67f30db0-7d4b-0136-d284-4d81a5daa3e5/img/cocoa-icon.svg",
+          name: "THIS ONE'S Veggie Milk",
+          img: "http://cdn8.bigcommerce.com/s-ayhps3hr1w/images/stencil/500x659/products/117/415/Fronks_Cocoa_01__28865.1484091275.png?c=2",
+          alt: "Cocoa",
+          title: "Cocoa" ,
+          class: "cocoa"
+        },
+        {
+          logo: "http://cdn8.bigcommerce.com/s-ayhps3hr1w/stencil/b45bc200-7d2d-0136-0c25-633ff0d6ced1/e/67f30db0-7d4b-0136-d284-4d81a5daa3e5/img/simple-icon.svg",
+          name: "THIS ONE'S Goat Milk",
+          img: "http://cdn8.bigcommerce.com/s-ayhps3hr1w/images/stencil/500x659/products/114/419/Fronks_Simple_04__73447.1484151189.png?c=2",
+          alt: "Simple",
+          title: "Simple" ,
+          class: "simple"
         }
-    })
-    </script>
-    
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>    
+      ]
+    },
+    methods: {
+      logout(){
+        localStorage.removeItem('token')
+      },
+    }
+  })
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>

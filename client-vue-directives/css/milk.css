@@ -1,0 +1,22 @@
+@font-face {
+  font-family: Lydian;
+  src: url(../fonts/Lydian_BT_Roman.ttf);
+}
+
+.card-title{
+  font-family: Lydian !important;
+  text-align: center
+}
+
+#milkprice{
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.btn-outline-dark{
+  border-color: black !important
+}
+
+#delete{
+  padding-left: 50px
+}

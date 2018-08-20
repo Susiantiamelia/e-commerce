@@ -1,0 +1,25 @@
+@font-face {
+  font-family: Lydian;
+  src: url(../fonts/Lydian_BT_Roman.ttf);
+}
+#app{
+  background-image: linear-gradient(#efefef 90%,#fff 15%);
+  height: 100vh
+}
+  
+.card{
+  background-color: transparent !important;
+  border: 0px !important
+}
+
+h3{
+  font-family: Lydian !important
+}
+
+p{
+  font-family: 'Karla', sans-serif !important;
+}
+
+#empty{
+  text-align: center
+}

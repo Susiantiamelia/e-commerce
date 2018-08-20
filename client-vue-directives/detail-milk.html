@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/navbar.css">
+  <link rel="stylesheet" href="./css/detail.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link rel="stylesheet" href="sweetalert2.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.11/sweetalert2.all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.11/sweetalert2.min.js"></script>
+
+</head>
+<body>
+  <div id="app">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="index.html">FRONKS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="d-flex flex-row justify-content-end">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="dashboard.html"><b>MILKS</b></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="cart.html"><b>YOUR ORDER</b></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="add-item.html" v-if="token == 'admin'"><b>ADD ITEM</b></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="login-regist.html" v-if="!token"><b>LOGIN</b></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="login-regist.html" v-if="!token"><b>SIGN UP</b></a>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link btn-flat" v-if="token" @click="logout"><b>LOGOUT</b></button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+          <div class="row">
+            <div class="d-flex flex-row justify-content-center">
+              <div class="card" style="width: 30rem">
+                <div class="card-body">
+                  <img :src="milk.image" width="120vh">
+                </div>
+              </div>
+              <div class="card" style="width: 40rem">
+                <br>
+                <h3>{{ milk.name }}</h3>
+                <br>
+                <p>Rp {{ milk.price }}</p>
+                <br>
+                <p>{{ milk.desc }}</p>
+                <br>
+                <button type="button" class="btn btn-outline-dark" @click="buymilk(milk)">Add to Cart<br><i class="fas fa-long-arrow-alt-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+
+  <style>
+    #app{
+      background-image: linear-gradient(#efefef 90%,#fff 15%);
+      height: 100vh
+    }
+  </style>
+
+
+  <script>
+  let app = new Vue({
+    el: '#app',
+    data(){
+      return {
+        token: localStorage.getItem('token'),
+        milk: ''
+      }
+    },
+    methods: {
+      logout(){
+          localStorage.removeItem('token')
+      },
+      buymilk(milk){
+        milk.quantity = 1
+        
+        let cart = localStorage.getItem('cart') || false
+        if(cart){
+          
+          let temp_cart = JSON.parse(cart)
+          temp_cart.push(milk)
+
+          localStorage.setItem('cart', JSON.stringify(temp_cart))
+          swal({
+              title: "Item successfully added to cart!",
+              type: "success",
+          });
+        } else {
+          let new_cart = []
+          new_cart.push(milk)
+          localStorage.setItem('cart', JSON.stringify(new_cart))
+          swal({
+              title: "Item successfully added to cart!",
+              type: "success",
+          });
+        }
+
+      }
+    },
+    created() {
+      let uri = window.location.href.split("?");
+      let idItem = uri[1]
+
+      axios.get(`http://localhost:3000/item/milk/${idItem}`)
+      .then(result => {
+        console.log(result);
+        this.milk = result.data.item[0]
+      })
+      
+    },
+  })
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+</html>

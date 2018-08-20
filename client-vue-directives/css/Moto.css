@@ -1,0 +1,16 @@
+@font-face {
+  font-family: Lydian;
+  src: url(../fonts/Lydian_BT_Roman.ttf);
+}
+h1{
+  text-align: center;
+  font-family: Lydian !important;
+  font-size: 34px
+}
+p{
+  font-family: 'Karla', sans-serif !important;
+  font-size: 12px
+}
+.container{
+  padding-top: 20vh
+}

@@ -13,10 +13,10 @@ Vue.component('Navbar', {
                   <a class="nav-link" href="dashboard.html"><b>MILKS</b></a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="#"><b>YOUR ORDER</b></a>
+                  <a class="nav-link" href="cart.html"><b>YOUR ORDER</b></a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="post-item.html" v-if="token == 'admin'"><b>ADD ITEM</b></a>
+                  <a class="nav-link" href="add-item.html" v-if="token == 'admin'"><b>ADD ITEM</b></a>
               </li>
               <li class="nav-item">
                   <a class="nav-link" href="login-regist.html" v-if="!token"><b>LOGIN</b></a>

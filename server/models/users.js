@@ -22,16 +22,11 @@ let userSchema = new Schema({
         },
         required: [ true, 'Please input your email' ]
       },
-      address: String,
-      phone: Number,
       password: {
         type: String,
         required: [true, 'Please input your password']
       },
-      transaction: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Transaction'
-      }]
+      role: String
 }, {timestamps: true})
 
 let User =mongoose.model('User', userSchema)

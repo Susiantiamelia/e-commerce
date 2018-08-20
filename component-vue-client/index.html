@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/navbar.css">
+  <link rel="stylesheet" href="./css/Moto.css">
+  <link rel="stylesheet" href="./css/milk-home.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <Navbar :token="token"></Navbar>
+    <Moto></Moto>
+    <div class="container">
+        <homemilk :milks="milks"></homemilk>
+    </div>
+  </div>
+
+  <style>
+    #app{
+      background-image: linear-gradient(#efefef 90%,#fff 15%);
+      overflow: hidden;
+      position: relative;
+      height: 100vh
+    }
+    
+  </style>
+
+  <script src="./components/milk-home.js"></script>
+  <script src="./components/moto.js"></script>
+  <script src="./components/navbar.js"></script>
+
+  <script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      token: localStorage.getItem('token'),
+      milks: [
+        {
+          logo: "http://cdn8.bigcommerce.com/s-ayhps3hr1w/stencil/b45bc200-7d2d-0136-0c25-633ff0d6ced1/e/67f30db0-7d4b-0136-d284-4d81a5daa3e5/img/original-icon.svg",
+          name: "THIS ONE'S Cow Milk",
+          img: "http://cdn8.bigcommerce.com/s-ayhps3hr1w/images/stencil/500x659/products/118/416/Fronks_Original_01__45224.1484091301.png?c=2",
+          alt: "Original",
+          title: "Original" ,
+          class: "original"
+        },
+        {
+          logo: "http://cdn8.bigcommerce.com/s-ayhps3hr1w/stencil/b45bc200-7d2d-0136-0c25-633ff0d6ced1/e/67f30db0-7d4b-0136-d284-4d81a5daa3e5/img/cocoa-icon.svg",
+          name: "THIS ONE'S Veggie Milk",
+          img: "http://cdn8.bigcommerce.com/s-ayhps3hr1w/images/stencil/500x659/products/117/415/Fronks_Cocoa_01__28865.1484091275.png?c=2",
+          alt: "Cocoa",
+          title: "Cocoa" ,
+          class: "cocoa"
+        },
+        {
+          logo: "http://cdn8.bigcommerce.com/s-ayhps3hr1w/stencil/b45bc200-7d2d-0136-0c25-633ff0d6ced1/e/67f30db0-7d4b-0136-d284-4d81a5daa3e5/img/simple-icon.svg",
+          name: "THIS ONE'S Goat Milk",
+          img: "http://cdn8.bigcommerce.com/s-ayhps3hr1w/images/stencil/500x659/products/114/419/Fronks_Simple_04__73447.1484151189.png?c=2",
+          alt: "Simple",
+          title: "Simple" ,
+          class: "simple"
+        }
+      ]
+    }
+  })
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>

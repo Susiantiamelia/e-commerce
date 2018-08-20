@@ -2,31 +2,28 @@ const mongoose = require('mongoose')
 const Schema   = mongoose.Schema
 
 let itemSchema = new Schema({
-    Name: {
+    name: {
         type: String,
-        required: 'Please input item name'
+        required: [true, 'please input item name']
     },
-    stock: {
+    price:{
         type: Number,
-        required: 'Please input item stock'
-    },
-    price: {
-        type: Number,
-        required: 'Please input item price'
-    } ,
-    Desc: {
-        type: String,
-        required: 'Please input item description'
+        required: [true, 'please input item price']
     },
     image: {
         type: String,
-        required: 'Please input item image'
+        required: [true, 'please input item image']
     },
-    item: [{
-        type: String
-    }]
+    category: {
+        type: String,
+        required: [true, 'please input category of this item']
+    },
+    desc: {
+        type: String,
+        required: [true, 'please input item description']
+    }
 },{timestamps: true})
 
-let Item = mongoose.model('Item', itemSchema)
+let Item =mongoose.model('Item', itemSchema)
 
 module.exports = Item

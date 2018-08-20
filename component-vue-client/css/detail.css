@@ -1,0 +1,30 @@
+@font-face {
+  font-family: Lydian;
+  src: url(../fonts/Lydian_BT_Roman.ttf);
+}
+
+h3{
+  font-family: Lydian !important
+}
+
+p{
+  font-family: 'Karla', sans-serif !important;
+  font-size: 17px
+}
+
+.card-body{
+  text-align: center
+}
+
+button{
+  width: 200px;
+}
+
+.card{
+  background-color: transparent !important;
+  border: 0px !important
+}
+
+.container{
+  padding-top: 10vh;
+}

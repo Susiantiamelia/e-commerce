@@ -44,7 +44,7 @@
       login(value){
         event.preventDefault()
         console.log(value)
-        axios.post('http://localhost:3000/users/login', value)
+        axios.post('http://35.187.254.233/users/login', value)
         .then(result => {
           localStorage.setItem('token',result.data.token)
           window.location.href="dashboard.html"
@@ -54,7 +54,7 @@
         })
       },
       regist(value){
-        axios.post('http://localhost:3000/users/register', value)
+        axios.post('http://35.187.254.233/users/register', value)
         .then(result => {
           value.fullname = ''
           value.username = ''

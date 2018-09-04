@@ -112,7 +112,7 @@
         },
         cat(value){
           console.log(value);
-          axios.get(`http://localhost:3000/item/category/${value}`)
+          axios.get(`http://35.187.254.233/item/category/${value}`)
           .then(result => {
             console.log(result);
 
@@ -131,7 +131,7 @@
         },
         edit(value){
           console.log(value);
-          axios.get(`http://localhost:3000/item/milk/${value}`)
+          axios.get(`http://35.187.254.233/item/milk/${value}`)
           .then(result => {
             let item= result.data.item[0]
             console.log(item);
@@ -155,7 +155,7 @@
                 console.log('disini');
                 
 
-                axios.put(`http://localhost:3000/item/update/${value}`, input)
+                axios.put(`http://35.187.254.233/item/update/${value}`, input)
                 .then(result => {
                   this.allmilk()
                 })
@@ -184,7 +184,7 @@
           })
           .then(result => {
             if(result.value){
-              axios.delete(`http://localhost:3000/item/delete/${value}`)
+              axios.delete(`http://35.187.254.233/item/delete/${value}`)
               .then(result => {
                 this.allmilk()
               })
@@ -197,7 +197,7 @@
           
         },
         allmilk(){
-          axios.get('http://localhost:3000/item/all')
+          axios.get('http://35.187.254.233/item/all')
           .then(result => {
             this.milks = result.data
           })

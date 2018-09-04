@@ -76,7 +76,7 @@
         let uri = window.location.href.split("?");
         let idItem = uri[1]
   
-        axios.get(`http://localhost:3000/item/milk/${idItem}`)
+        axios.get(`http://35.187.254.233/item/milk/${idItem}`)
         .then(result => {
           console.log(result);
           this.milk = result.data.item[0]
